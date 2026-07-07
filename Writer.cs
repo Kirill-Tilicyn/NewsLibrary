@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace NewsLibrary
 {
-    internal class Writer
+    public class Writer
     {
         private string _name;
         private List<Article> _articles;

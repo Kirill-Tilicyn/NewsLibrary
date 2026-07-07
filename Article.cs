@@ -2,7 +2,7 @@
 
 namespace NewsLibrary
 {
-    internal class Article
+    public class Article
     {
     }
 }
