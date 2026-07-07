@@ -32,7 +32,7 @@ namespace NewsLibrary
             return _articles;
         }
 
-        public Article SetArticle(string title)
+        public Article WriteArticle(string title)
         {
             if (title == null)
             {
