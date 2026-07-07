@@ -6,7 +6,7 @@ namespace NewsLibrary
     internal class Writer
     {
         private string _name;
-        private List<string> _articles;
+        private List<Article> _articles;
 
         public Writer(string name)
         {
@@ -19,7 +19,7 @@ namespace NewsLibrary
                 _name = name;
             }
 
-            _articles = new List<string>();
+            _articles = new List<Article>();
         }
 
         public string GetName()
