@@ -32,15 +32,16 @@ namespace NewsLibrary
             return _articles;
         }
 
-        public bool SetArticle(Article article)
+        public Article SetArticle(string title)
         {
-            if (article == null)
+            if (title == null)
             {
-                return false;
+                return null;
             }
 
+            Article article = new Article(title);
             _articles.Add(article);
-            return true;
+            return article;
         }
     }
 }
