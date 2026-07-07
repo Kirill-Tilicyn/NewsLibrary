@@ -26,5 +26,21 @@ namespace NewsLibrary
         {
             return _name;
         }
+
+        public List<Article> GetArticles()
+        {
+            return _articles;
+        }
+
+        public bool SetArticle(Article article)
+        {
+            if (article == null)
+            {
+                return false;
+            }
+
+            _articles.Add(article);
+            return true;
+        }
     }
 }
