@@ -21,5 +21,10 @@ namespace NewsLibrary
 
             _articles = new List<string>();
         }
+
+        public string GetName()
+        {
+            return _name;
+        }
     }
 }
