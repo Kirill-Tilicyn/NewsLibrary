@@ -5,11 +5,11 @@ namespace NewsLibrary
 {
     internal class Website
     {
-        private List<string> _writers;
+        private List<Writer> _writers;
 
         public Website()
         {
-            _writers = new List<string>();
+            _writers = new List<Writer>();
         }
 
         public bool SetWriter(Writer writer)
@@ -23,7 +23,7 @@ namespace NewsLibrary
             return true;
         }
 
-        public List<string> GetWriters()
+        public List<Writer> GetWriters()
         {
             return _writers;
         }
