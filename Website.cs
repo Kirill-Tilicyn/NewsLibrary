@@ -11,5 +11,21 @@ namespace NewsLibrary
         {
             _writers = new List<string>();
         }
+
+        public bool SetWriter(Writer writer)
+        {
+            if (writer == null)
+            {
+                return false;
+            }
+
+            _writers.Add(writer);
+            return true;
+        }
+
+        public List<string> GetWriters()
+        {
+            return _writers;
+        }
     }
 }
