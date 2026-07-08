@@ -27,5 +27,20 @@ namespace NewsLibrary
         {
             return _writers;
         }
+
+        public string PublishArticle()
+        {
+            foreach (Writer writer in _writers)
+            {
+                List<Article> articles = writer.GetArticles();
+
+                foreach (Article article in articles)
+                {
+                    return $"Статья {article.GetTitle()} опубликована автором {writer.GetName()}";
+                }
+            }
+
+            return null;
+        }
     }
 }
