@@ -28,7 +28,7 @@ namespace NewsLibrary
             return _writers;
         }
 
-        public string PublishArticle()
+        public void PublishArticle()
         {
             foreach (Writer writer in _writers)
             {
@@ -36,11 +36,9 @@ namespace NewsLibrary
 
                 foreach (Article article in articles)
                 {
-                    return $"Статья {article.GetTitle()} опубликована автором {writer.GetName()}";
+                    Console.WriteLine($"Статья {article.GetTitle()} опубликована автором {writer.GetName()}");
                 }
             }
-
-            return null;
         }
     }
 }
