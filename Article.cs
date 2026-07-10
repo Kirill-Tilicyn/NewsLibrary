@@ -1,24 +1,31 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace NewsLibrary
 {
     public class Article
     {
-        private Dictionary<string, string> _articles;
+        private string _title;
+        private string _description;
 
         public Article(string title, string description)
         {
-            new Dictionary<string, string>();
-
             if (string.IsNullOrEmpty(title) && string.IsNullOrEmpty(description))
             {
-                _articles.Add("Без названия", "Пустая статья");
+                _title = "Без названия";
+                _description = "Пустая статья";
             }
             else
             {
-                _articles.Add(title, description);
+                _title = title;
+                _description = description;
             }
+
+            _description = description;
+        }
+
+        public string GetTitle()
+        {
+            return _title;
         }
     }
 }
