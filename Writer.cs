@@ -32,15 +32,16 @@ namespace NewsLibrary
             return _articles;
         }
 
-        public Article WriteArticle(string title)
+        public Article WriteArticle(string title, string description)
         {
-            if (title == null)
+            if (title == null && description == null)
             {
                 return null;
             }
 
-            Article article = new Article(title);
+            Article article = new Article(title, description);
             _articles.Add(article);
+
             return article;
         }
     }
