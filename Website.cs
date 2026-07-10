@@ -42,7 +42,9 @@ namespace NewsLibrary
 
                 foreach (Article article in articles)
                 {
-                    Console.WriteLine($"Статья {article.GetTitle()} опубликована автором {writer.GetName()}");
+                    Console.WriteLine($"Автор: {writer.GetName()}.");
+                    Console.WriteLine($"Название статьи: {article.GetTitle()}");
+                    Console.WriteLine($"Содержание статьи: {article.GetDescription()}");
                 }
             }
         }
