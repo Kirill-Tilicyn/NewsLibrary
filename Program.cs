@@ -52,7 +52,7 @@ namespace NewsLibrary
 
                         foreach (Website website in websites)
                         {
-                            Console.WriteLine(website);
+                            Console.WriteLine(website.GetNameWebsite());
                         }
                     }
                     else if (userActionNumber == (int)MenuAction.WorkingWebsite)
@@ -65,7 +65,7 @@ namespace NewsLibrary
                         {
                             foreach (Website website in websites)
                             {
-                                if (website.GetNameWebsite() == nameWebsite);
+                                if (website.GetNameWebsite() == nameWebsite)
                                 {
                                     foundSite = website;
                                 }
@@ -78,7 +78,7 @@ namespace NewsLibrary
                         }
                         else
                         {
-
+                            foundSite.LaunchWebsiteMenu();
                         }
                     }
                     else if (userActionNumber == (int)MenuAction.Exit)
