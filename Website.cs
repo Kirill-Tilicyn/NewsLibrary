@@ -122,6 +122,12 @@ namespace NewsLibrary
                             string description = RequestDescriptionArticle();
 
                             WriteArticle(activeWriter, title, description);
+
+                            Console.WriteLine("Статья опубликована!");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Произошла какая-то ошибка! Статья не опубликована!");
                         }
                     }
                     else if (userChoisNumber == (int)MenuAction.ShowWriters)

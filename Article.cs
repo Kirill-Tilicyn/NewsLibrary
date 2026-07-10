@@ -9,14 +9,21 @@ namespace NewsLibrary
 
         public Article(string title, string description)
         {
-            if (string.IsNullOrEmpty(title) && string.IsNullOrEmpty(description))
+            if (string.IsNullOrEmpty(title))
             {
                 _title = "Без названия";
-                _description = "Пустая статья";
             }
             else
             {
                 _title = title;
+            }
+
+            if (string.IsNullOrEmpty(description))
+            {
+                _description = "Пустая статья";
+            }
+            else
+            {
                 _description = description;
             }
         }
