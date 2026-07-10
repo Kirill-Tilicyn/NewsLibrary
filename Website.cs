@@ -5,11 +5,21 @@ namespace NewsLibrary
 {
     public class Website
     {
+        private string _nameWebsite;
         private List<Writer> _writers;
 
-        public Website()
+        public Website(string nameWebsite)
         {
-            _writers = new List<Writer>();
+            if (string.IsNullOrEmpty(nameWebsite))
+            {
+                _nameWebsite = "Неизвестный сайт";
+            }
+            else
+            {
+                _nameWebsite = nameWebsite;
+            }
+
+                _writers = new List<Writer>();
         }
 
         public bool SetWriter(Writer writer)
@@ -34,7 +44,7 @@ namespace NewsLibrary
             return true;
         }
 
-        public void PublishArticle()
+        public void PublishArticles()
         {
             foreach (Writer writer in _writers)
             {
