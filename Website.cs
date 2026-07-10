@@ -19,36 +19,12 @@ namespace NewsLibrary
                 _nameWebsite = nameWebsite;
             }
 
-                _writers = new List<Writer>();
+            _writers = new List<Writer>();
         }
 
         public string GetNameWebsite()
         {
             return _nameWebsite;
-        }
-
-        public bool SetWriter(Writer writer)
-        {
-            if (writer == null)
-            {
-                return false;
-            }
-
-            _writers.Add(writer);
-            return true;
-        }
-
-        public (bool,Writer) GetWriterByName(string nameWriter)
-        {
-            foreach (Writer writer in _writers)
-            {
-                if (writer.GetName() == nameWriter)
-                {
-                    return (true,writer);
-                }
-            }
-
-            return (false, null);
         }
 
         public bool WriteArticle(Writer name, string title, string description)
@@ -60,21 +36,6 @@ namespace NewsLibrary
 
             name.WriteArticle(title, description);
             return true;
-        }
-
-        public void PublishArticles()
-        {
-            foreach (Writer writer in _writers)
-            {
-                List<Article> articles = writer.GetArticles();
-
-                foreach (Article article in articles)
-                {
-                    Console.WriteLine($"Автор: {writer.GetName()}.");
-                    Console.WriteLine($"Название статьи: {article.GetTitle()}");
-                    Console.WriteLine($"Содержание статьи: {article.GetDescription()}");
-                }
-            }
         }
 
         private enum MenuAction
@@ -107,19 +68,69 @@ namespace NewsLibrary
                 {
                     if (userChoisNumber == (int)MenuAction.AddWrite)
                     {
+                        string nameWriter = RequestNameWriter();
+
+                        bool isThereWriter = false;
+
+                        if (nameWriter != null)
+                        {
+                            foreach (Writer writer in _writers)
+                            {
+                                if (writer.GetName() == nameWriter)
+                                {
+                                    isThereWriter = true;
+                                    Console.WriteLine("Такой автор уже существует на данном сайте!");
+                                }
+                            }
+
+                            if (isThereWriter == false)
+                            {
+                                _writers.Add(new Writer(nameWriter));
+
+                                Console.WriteLine("Писатель добавлен на сайте!");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Вы ввели некорректное имя!");
+                        }
 
                     }
                     else if (userChoisNumber == (int)MenuAction.AddArticle)
                     {
+                        string nameWriter = RequestNameWriter();
 
+                        Writer activeWriter = null;
+
+                        bool isThereWriter = false;
+
+                        if (nameWriter != null)
+                        {
+                            foreach (Writer writer in _writers)
+                            {
+                                if (writer.GetName() == nameWriter)
+                                {
+                                    activeWriter = writer;
+                                    isThereWriter = true;
+                                }
+                            }
+                        }
+
+                        if (isThereWriter)
+                        {
+                            string title = RequestTitleArticle();
+                            string description = RequestDescriptionArticle();
+
+                            WriteArticle(activeWriter, title, description);
+                        }
                     }
                     else if (userChoisNumber == (int)MenuAction.ShowWriters)
                     {
-
+                        ShowWriters();
                     }
                     else if (userChoisNumber == (int)MenuAction.ShowArticles)
                     {
-
+                        ShowArticles();
                     }
                     else if (userChoisNumber == (int)MenuAction.Exit)
                     {
@@ -133,6 +144,52 @@ namespace NewsLibrary
                 else
                 {
                     Console.WriteLine("Номер действия не распознан!. Попробуйте еще раз!");
+                }
+            }
+        }
+
+        private string RequestNameWriter()
+        {
+            Console.Write("Введите полное имя автора: ");
+            string name = Console.ReadLine()?.Trim();
+            return name;
+        }
+
+        private string RequestTitleArticle()
+        {
+            Console.Write("Введите название статьи: ");
+            string title = Console.ReadLine()?.Trim();
+            return title;
+        }
+
+        private string RequestDescriptionArticle()
+        {
+            Console.Write("Введите содержимое статьи ");
+            string description = Console.ReadLine()?.Trim();
+            return description;
+        }
+
+        private void ShowWriters()
+        {
+            Console.WriteLine("Список писателей зарегистрированных на сайте: ");
+
+            foreach (Writer writer in _writers)
+            {
+                Console.WriteLine(writer.GetName());
+            }
+        }
+
+        private void ShowArticles()
+        {
+            foreach (Writer writer in _writers)
+            {
+                List<Article> articles = writer.GetArticles();
+
+                foreach (Article article in articles)
+                {
+                    Console.WriteLine($"Автор: {writer.GetName()}.");
+                    Console.WriteLine($"Название статьи: {article.GetTitle()}");
+                    Console.WriteLine($"Содержание статьи: {article.GetDescription()}");
                 }
             }
         }
