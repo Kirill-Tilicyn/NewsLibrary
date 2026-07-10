@@ -76,5 +76,65 @@ namespace NewsLibrary
                 }
             }
         }
+
+        private enum MenuAction
+        {
+            AddWrite = 1,
+            AddArticle = 2,
+            ShowWriters = 3,
+            ShowArticles = 4,
+            Exit = 5
+        }
+
+        public void LaunchWebsiteMenu()
+        {
+            bool isWebsiteRunning = true;
+
+            while (isWebsiteRunning)
+            {
+                Console.WriteLine("Выберите вариант действия: ");
+                Console.WriteLine($"1 - Добавить автора.");
+                Console.WriteLine($"2 - Написать и опубликовать статью.");
+                Console.WriteLine($"3 - Просмотреть список авторов.");
+                Console.WriteLine($"4 - Просмотреть опубликованные статьи.");
+                Console.WriteLine($"5 - Выход.");
+                Console.Write("Введите номер действия: ");
+                string userChoisNumberText = Console.ReadLine()?.Trim();
+
+                bool userChoisNumberValid = int.TryParse(userChoisNumberText, out int userChoisNumber);
+
+                if (userChoisNumberValid)
+                {
+                    if (userChoisNumber == (int)MenuAction.AddWrite)
+                    {
+
+                    }
+                    else if (userChoisNumber == (int)MenuAction.AddArticle)
+                    {
+
+                    }
+                    else if (userChoisNumber == (int)MenuAction.ShowWriters)
+                    {
+
+                    }
+                    else if (userChoisNumber == (int)MenuAction.ShowArticles)
+                    {
+
+                    }
+                    else if (userChoisNumber == (int)MenuAction.Exit)
+                    {
+                        isWebsiteRunning = false;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Действия под таким номером нет! Попробуйте еще раз!");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Номер действия не распознан!. Попробуйте еще раз!");
+                }
+            }
+        }
     }
 }
