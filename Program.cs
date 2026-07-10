@@ -5,23 +5,126 @@ namespace NewsLibrary
 {
     internal class Program
     {
+        private enum MenuAction
+        {
+            AddWebsite = 1,
+            ViewingWebsite = 2,
+            WorkingWebsite = 3,
+            Exit = 4
+        }
+
         public static void Main(string[] args)
         {
-            Website website = new Website();
+            bool isProgramRunning = true;
 
-            Writer writer1 = new Writer("Иван Иванов");
-            Writer writer2 = new Writer("Петя Петров");
+            List<Website> websites = new List<Website>();
 
-            writer1.WriteArticle("Статья 1");
-            writer1.WriteArticle("Статья 2");
+            while (isProgramRunning)
+            {
+                Console.WriteLine("Выберите действие: ");
+                Console.WriteLine($"{(int)MenuAction.AddWebsite} - Добавить сайт.");
+                Console.WriteLine($"{(int)MenuAction.ViewingWebsite} - Просмотр списка сайтов.");
+                Console.WriteLine($"{(int)MenuAction.WorkingWebsite} - Работать с сайтом.");
+                Console.WriteLine($"{(int)MenuAction.Exit} - Закончить работу.");
+                Console.Write("Введите номер выбранного действия: ");
+                string userActionNumberText = Console.ReadLine()?.Trim();
 
-            writer2.WriteArticle("Статья 1.1");
-            writer2.WriteArticle("Статья 2.2");
+                bool userActionNumberValid = int.TryParse(userActionNumberText, out int userActionNumber);
 
-            website.SetWriter(writer1);
-            website.SetWriter(writer2);
+                if (userActionNumberValid)
+                {
+                    if (userActionNumber == (int)MenuAction.AddWebsite)
+                    {
+                        bool hasAdditionCompleted = AddWebSite(websites);
 
-            website.PublishArticle();
+                        if (hasAdditionCompleted)
+                        {
+                            Console.WriteLine("Сайт создан!");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Не получилось создать такой сайт! Попробуйте еще раз!");
+                        }
+                    }
+                    else if (userActionNumber == (int)MenuAction.ViewingWebsite)
+                    {
+                        Console.WriteLine("Список доступных сайтов: ");
+
+                        foreach (Website website in websites)
+                        {
+                            Console.WriteLine(website);
+                        }
+                    }
+                    else if (userActionNumber == (int)MenuAction.WorkingWebsite)
+                    {
+                        Website foundSite = null;
+
+                        string nameWebsite = RequestNameWebsite();
+
+                        if (nameWebsite != null)
+                        {
+                            foreach (Website website in websites)
+                            {
+                                if (website.GetNameWebsite() == nameWebsite);
+                                {
+                                    foundSite = website;
+                                }
+                            }
+                        }
+
+                        if (foundSite == null)
+                        {
+                            Console.WriteLine("Сайт не найден!");
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                    else if (userActionNumber == (int)MenuAction.Exit)
+                    {
+                        isProgramRunning = false;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Действия под таким номером нет!");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Ваш выбор некорректен! Попробуйте еще раз!");
+                }
+            }
+        }
+        
+        public static string RequestNameWebsite()
+        {
+            Console.Write("Введите название сайта: ");
+            string nameWebsite = Console.ReadLine()?.Trim();
+            return nameWebsite;
+        }
+
+        public static bool AddWebSite(List<Website> websites)
+        {
+            string nameWebsite = RequestNameWebsite();
+
+            if (string.IsNullOrEmpty(nameWebsite))
+            {
+                return false;
+            }
+            else
+            {
+                foreach (Website website in websites)
+                {
+                    if (website.GetNameWebsite() == nameWebsite)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            websites.Add(new Website(nameWebsite));
+            return true;
         }
     }
 }
