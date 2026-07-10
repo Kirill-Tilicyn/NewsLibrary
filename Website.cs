@@ -23,11 +23,6 @@ namespace NewsLibrary
             return true;
         }
 
-        public List<Writer> GetWriters()
-        {
-            return _writers;
-        }
-
         public void PublishArticle()
         {
             foreach (Writer writer in _writers)
