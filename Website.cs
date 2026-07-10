@@ -23,6 +23,17 @@ namespace NewsLibrary
             return true;
         }
 
+        public bool WriteArticle(Writer name, string title, string description)
+        {
+            if (!_writers.Contains(name))
+            {
+                return false;
+            }
+
+            name.WriteArticle(title, description);
+            return true;
+        }
+
         public void PublishArticle()
         {
             foreach (Writer writer in _writers)
