@@ -38,6 +38,19 @@ namespace NewsLibrary
             return true;
         }
 
+        public (bool,Writer) GetWriterByName(string nameWriter)
+        {
+            foreach (Writer writer in _writers)
+            {
+                if (writer.GetName() == nameWriter)
+                {
+                    return (true,writer);
+                }
+            }
+
+            return (false, null);
+        }
+
         public bool WriteArticle(Writer name, string title, string description)
         {
             if (!_writers.Contains(name))
