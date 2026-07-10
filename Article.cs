@@ -27,5 +27,10 @@ namespace NewsLibrary
         {
             return _title;
         }
+
+        public string GetDescription()
+        {
+            return _description;
+        }
     }
 }
