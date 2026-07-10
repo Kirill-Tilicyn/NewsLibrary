@@ -22,6 +22,11 @@ namespace NewsLibrary
                 _writers = new List<Writer>();
         }
 
+        public string GetNameWebsite()
+        {
+            return _nameWebsite;
+        }
+
         public bool SetWriter(Writer writer)
         {
             if (writer == null)
