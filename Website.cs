@@ -53,6 +53,7 @@ namespace NewsLibrary
 
             while (isWebsiteRunning)
             {
+                Console.WriteLine($"Вы находитесь на сайте: {GetNameWebsite()}");
                 Console.WriteLine("Выберите вариант действия: ");
                 Console.WriteLine($"1 - Добавить автора.");
                 Console.WriteLine($"2 - Написать и опубликовать статью.");
@@ -63,6 +64,8 @@ namespace NewsLibrary
                 string userChoisNumberText = Console.ReadLine()?.Trim();
 
                 bool userChoisNumberValid = int.TryParse(userChoisNumberText, out int userChoisNumber);
+
+                Console.WriteLine();
 
                 if (userChoisNumberValid)
                 {
@@ -151,13 +154,20 @@ namespace NewsLibrary
                 {
                     Console.WriteLine("Номер действия не распознан!. Попробуйте еще раз!");
                 }
+
+                Console.WriteLine();
             }
+
+            Console.WriteLine("Вы покинули сайт!");
         }
 
         private string RequestNameWriter()
         {
             Console.Write("Введите полное имя автора: ");
             string name = Console.ReadLine()?.Trim();
+
+            Console.WriteLine();
+
             return name;
         }
 
@@ -165,6 +175,9 @@ namespace NewsLibrary
         {
             Console.Write("Введите название статьи: ");
             string title = Console.ReadLine()?.Trim();
+
+            Console.WriteLine();
+
             return title;
         }
 
@@ -172,31 +185,54 @@ namespace NewsLibrary
         {
             Console.Write("Введите содержимое статьи ");
             string description = Console.ReadLine()?.Trim();
+
+            Console.WriteLine();
+
             return description;
         }
 
         private void ShowWriters()
         {
-            Console.WriteLine("Список писателей зарегистрированных на сайте: ");
-
-            foreach (Writer writer in _writers)
+            if (_writers.Count > 0)
             {
-                Console.WriteLine(writer.GetName());
+                Console.WriteLine("Список писателей зарегистрированных на сайте: ");
+
+                foreach (Writer writer in _writers)
+                {
+                    Console.WriteLine(writer.GetName());
+                }
+            }
+            else
+            { 
+                Console.WriteLine("На сайте нет зарегистрированных писателей!");
             }
         }
 
         private void ShowArticles()
         {
+            int totalArticles = 0;
+
             foreach (Writer writer in _writers)
             {
-                List<Article> articles = writer.GetArticles();
+                totalArticles = writer.GetArticles().Count;
+            }
 
-                foreach (Article article in articles)
+            if (totalArticles > 0)
+            {
+                foreach (Writer writer in _writers)
                 {
-                    Console.WriteLine($"Автор: {writer.GetName()}.");
-                    Console.WriteLine($"Название статьи: {article.GetTitle()}");
-                    Console.WriteLine($"Содержание статьи: {article.GetDescription()}");
+                    foreach (Article article in writer.GetArticles())
+                    {
+                        Console.WriteLine($"Автор: {writer.GetName()}.");
+                        Console.WriteLine($"Название статьи: {article.GetTitle()}");
+                        Console.WriteLine($"Содержание статьи: {article.GetDescription()}");
+
+                    }
                 }
+            }
+            else
+            {
+                Console.WriteLine("На сайте нет опубликованных статей!");
             }
         }
     }
