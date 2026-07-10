@@ -31,11 +31,15 @@ namespace NewsLibrary
 
                 bool userActionNumberValid = int.TryParse(userActionNumberText, out int userActionNumber);
 
+                Console.WriteLine();
+
                 if (userActionNumberValid)
                 {
                     if (userActionNumber == (int)MenuAction.AddWebsite)
                     {
                         bool hasAdditionCompleted = AddWebSite(websites);
+
+                        Console.WriteLine();
 
                         if (hasAdditionCompleted)
                         {
@@ -60,6 +64,8 @@ namespace NewsLibrary
                         Website foundSite = null;
 
                         string nameWebsite = RequestNameWebsite();
+
+                        Console.WriteLine();
 
                         if (nameWebsite != null)
                         {
@@ -94,7 +100,11 @@ namespace NewsLibrary
                 {
                     Console.WriteLine("Ваш выбор некорректен! Попробуйте еще раз!");
                 }
+
+                Console.WriteLine();
             }
+
+            Console.WriteLine("Спасибо за использование нашей программы!");
         }
         
         public static string RequestNameWebsite()
