@@ -19,8 +19,6 @@ namespace NewsLibrary
                 _title = title;
                 _description = description;
             }
-
-            _description = description;
         }
 
         public string GetTitle()
